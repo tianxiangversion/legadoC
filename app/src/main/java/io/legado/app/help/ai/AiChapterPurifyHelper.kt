@@ -319,6 +319,7 @@ object AiChapterPurifyHelper {
             ?: throw AiChapterPurifyException("模型返回内容无法解析：缺少 rules 数组")
         val sourceById = paragraphs.associateBy { it.id }
         return responseRules.mapIndexedNotNull { index, rule ->
+        try {
             val id = rule.id
             val paragraph = sourceById[id]
                 ?: throw AiChapterPurifyException(
@@ -376,7 +377,7 @@ object AiChapterPurifyHelper {
                 )
             }
             validateRule(index + 1, type, effectiveOld, new, source)
-            AiChapterPurifyRule(id, type, effectiveOld, new)
+            AiChapterPurifyRule(id, type, effectiveOld, new) } catch (e: AiChapterPurifyException) { AppLog.putAi("CHAPTER_PURIFY RULE_SKIPPED: ${e.message}", e); null }
         }
     }
 
