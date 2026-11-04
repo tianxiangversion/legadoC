@@ -107,7 +107,7 @@ android {
         }
         beta {
             signingConfig signingConfigs.debug
-            applicationIdSuffix '.c'
+            applicationIdSuffix '.ctest'
             versionNameSuffix '.beta'
             manifestPlaceholders.put("app_name", "@string/app_name")
 
